@@ -2,6 +2,12 @@
 
 > Utility function for merging an object into a reactive object in Vue
 
+## Demo
+
+Here's a CodePen where you can play with merging an object into a sample Vuex state:
+
+https://codepen.io/richardtallent/pen/eyWKGN
+
 ## Purpose
 
 I'm working on several Vue+Vuex applications, and I'm fortunate to have control over both the Vuex and API design. As a database guy, I've chosen to use a normalized approach similar to what is shown here, and to have my API respond with JSON that mirrors the page state shape for entities, lists of entities, and relationships between entities:
