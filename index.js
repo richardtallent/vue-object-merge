@@ -1,17 +1,22 @@
 import Vue from "vue"
 
-exports.stateMerge = function(state, value, name) {
-	let doIterate = !!value && typeof value === "object" && !Array.isArray(value)
-	if (doIterate) {
-		const t = Object.prototype.toString.call(value)
-		doIterate = t !== "[object RegExp]" && t !== "[object Date]"
-		if (doIterate && (name == null || state.hasOwnProperty(name))) {
-			const newDestination = name == null ? state : state[name]
-			for (const prop in value) {
-				stateMerge(newDestination, value[prop], prop)
-			}
-			return
+exports.stateMerge = function(state, value, propName) {
+	// For Date, Array, RegEx, Number, String, Boolean, Math, Function, String, null, and
+	// undefined, we want to overwrite the state's value, not iterate. prototype.toString
+	// provides a shortcut for this, as all user-defined objects return [object Object],
+	// and all of those other types return different values.
+	//
+	// If the call to `stateMerge` should iterate `state` itself rather than a member of
+	// `state`, don't provide a `propName` argument.
+	if (
+		Object.prototype.toString.call(value) === "[object Object]" &&
+		(propName == null || state.hasOwnProperty(propName))
+	) {
+		const o = propName == null ? state : state[propName]
+		for (const prop in value) {
+			stateMerge(o, value[prop], prop)
 		}
+		return
 	}
-	Vue.set(state, name, value)
+	Vue.set(state, propName, value)
 }
