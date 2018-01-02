@@ -57,6 +57,7 @@ orders: {
 
 ### Result (final state):
 ```Javascript
+foo: true,
 products: {
 	46: { id: 46, name: "Apples", color: "red" }
 	22: { id: 22, name: "Oranges", color: "orange" }
