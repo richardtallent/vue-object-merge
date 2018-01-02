@@ -90,6 +90,22 @@ export const store = new Vuex.Store({
 }
 ```
 
+## Usage and Implementation Details
+
+```JavaScript
+function stateMerge(state, value, propName)
+```
+
+The initial call to `stateMerge` would normally be setting `state` to the root object that `stateMerge` is allowed to modify (say, `this.store.state.entities`), and `value` should be the object that should have properties that match up against that state. `propName` should be null, that third parameter is used during recursion.
+
+This function loops through the properties of `value` (which must be an object) and looks at the type of each property.
+
+For properties that are user-defined objects, if `state` has a property of the same name, it performs a recursive call to loop through *that* pairing of state's object and the property.
+
+For properties that are *not* user-defined objects, *or* where `state` doesn't have a property of that name, `state` is mutated to set the property value.
+
+Testing the "type" of an object can be complicated--typeof, instanceof, and other methods all have pros and cons. In this case, there was a pretty simple answer: `Object.prototype.toString.call(value)`. This returns `[object Object]` for all user-defined objects (the ones we want to recursively call `stateMerge` for), and returns different values for various built-in JavaScript types like Date, Array, RegEx, Number, String, Boolean, Math, Function, String, null, and undefined--the ones we want to just set the value for.
+
 ## Build Setup
 
 ```bash
