@@ -1,6 +1,6 @@
 import Vue from "vue"
 
-exports.stateMerge = function(state, value, propName) {
+export const stateMerge = function(state, value, propName) {
 	if (
 		Object.prototype.toString.call(value) === "[object Object]" &&
 		(propName == null || state.hasOwnProperty(propName))

@@ -122,3 +122,4 @@ npm run build
 | ---------- | ------- | -----------------------
 | 2018.01.01 | 0.1.0   | First release
 | 2018.01.01 | 0.1.1   | Cleaned up and simplified type checking.
+| 2018.01.01 | 0.1.2   | Fixed module export
