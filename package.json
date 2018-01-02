@@ -8,6 +8,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Richard Tallent <richard@tallent.us> (https://www.tallent.us)",
+	"repository": "https://github.com/richardtallent/vue-object-merge",
 	"license": "MIT",
 	"dependencies": {
 		"vue": "^2.5.13"
