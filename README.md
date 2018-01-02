@@ -68,7 +68,7 @@ orders: {
 },
 ```
 
-## Example usage in Vuex (assumes imports, etc.)
+## Example usage in Vuex (assumes you've installed it from npm, etc.)
 
 ```JavaScript
 import stateMerge from "vue-object-merge"
