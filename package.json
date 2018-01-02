@@ -1,0 +1,15 @@
+{
+	"name": "vue-object-merge",
+	"version": "0.1.0",
+	"description":
+		"Utility function for merging an object into a reactive object in Vue",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Richard Tallent <richard@tallent.us> (https://www.tallent.us)",
+	"license": "MIT",
+	"dependencies": {
+		"vue": "^2.5.13"
+	}
+}
