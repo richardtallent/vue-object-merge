@@ -6,7 +6,7 @@ export const stateMerge = function(state, value, propName) {
 		(propName == null || state.hasOwnProperty(propName))
 	) {
 		const o = propName == null ? state : state[propName]
-		for (const prop in value) {
+		for (let prop in value) {
 			stateMerge(o, value[prop], prop)
 		}
 		return

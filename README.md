@@ -16,12 +16,12 @@ https://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html
 
 This means the majority of my API calls need to be folded into the Vuex state following a very simple pattern:
 
-- Dispatch an action that calls the web API
-- Await the JSON response
-- Traverse the JSON response. For each property, compare with the same key in the Vuex store state:
-- Add keys that are new
-- For existing arrays, primitives, dates, or regex objects, update the store
-- For existing objects, loop through their properties recursively using the same logic
+* Dispatch an action that calls the web API
+* Await the JSON response
+* Traverse the JSON response. For each property, compare with the same key in the Vuex store state:
+* Add keys that are new
+* For existing arrays, primitives, dates, or regex objects, update the store
+* For existing objects, loop through their properties recursively using the same logic
 
 This pattern is often referred to as a "object merge" or "deep assign," and there are variants depending on how you want to approach arrays, mismatched types, nulls, etc. Also, for Vuex, there are special calls needed to assign new state variables and modify others properly, since we don't (yet) have proxy support in Vue/Vuex.
 
@@ -34,11 +34,13 @@ It could also be used for, say, handling mutations to update a Vuex state object
 If this ends up being useful to you, please give me a shout out! If you discover a bug, please let me know (and ideally send a PR).
 
 ## Caveats
+
 This only works if your source object forms a **directed acyclic graph**. Source properties should not point back to their ancestors or you'll have an endless loop. Good normalization avoids this.
 
 ## Merge example:
 
 ### Destination (old state):
+
 ```Javascript
 products: {
 	46: { id: 46, name: "Apples" }
@@ -49,6 +51,7 @@ orders: {
 ```
 
 ### Source (new data):
+
 ```Javascript
 foo: true,
 products: {
@@ -62,6 +65,7 @@ orders: {
 ```
 
 ### Result (final state):
+
 ```Javascript
 foo: true,
 products: {
@@ -106,9 +110,9 @@ The initial call to `stateMerge` would normally be setting `state` to the root o
 
 This function loops through the properties of `value` (which must be an object) and looks at the type of each property.
 
-For properties that are user-defined objects, if `state` has a property of the same name, it performs a recursive call to loop through *that* pairing of state's object and the property.
+For properties that are user-defined objects, if `state` has a property of the same name, it performs a recursive call to loop through _that_ pairing of state's object and the property.
 
-For properties that are *not* user-defined objects, *or* where `state` doesn't have a property of that name, `state` is mutated to set the property value.
+For properties that are _not_ user-defined objects, _or_ where `state` doesn't have a property of that name, `state` is mutated to set the property value.
 
 Testing the "type" of an object can be complicated--typeof, instanceof, and other methods all have pros and cons. In this case, there was a pretty simple answer: `Object.prototype.toString.call(value)`. This returns `[object Object]` for all user-defined objects (the ones we want to recursively call `stateMerge` for), and returns different values for various built-in JavaScript types like Date, Array, RegEx, Number, String, Boolean, Math, Function, String, null, and undefined--the ones we want to just set the value for.
 
@@ -124,8 +128,9 @@ npm run build
 
 ## Release History
 
-| Date       | Version | Notes |
-| ---------- | ------- | -----------------------
-| 2018.01.01 | 0.1.0   | First release
-| 2018.01.01 | 0.1.1   | Cleaned up and simplified type checking.
-| 2018.01.01 | 0.1.2   | Fixed module export
+| Date       | Version | Notes                                    |
+| ---------- | ------- | ---------------------------------------- |
+| 2018.01.01 | 0.1.0   | First release                            |
+| 2018.01.01 | 0.1.1   | Cleaned up and simplified type checking. |
+| 2018.01.01 | 0.1.2   | Fixed module export                      |
+| 2018.01.03 | 0.1.3   | IE11 doesn't like `for(const...)`        |
