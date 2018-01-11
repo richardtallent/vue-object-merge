@@ -134,3 +134,4 @@ npm run build
 | 2018.01.01 | 0.1.1   | Cleaned up and simplified type checking. |
 | 2018.01.01 | 0.1.2   | Fixed module export                      |
 | 2018.01.03 | 0.1.3   | IE11 doesn't like `for(const...)`        |
+| 2018.01.11 | 0.1.4   | npm build doesn't like ES6 at all        |
