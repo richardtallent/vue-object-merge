@@ -3,13 +3,59 @@
 > Utility function for merging an object into a reactive object in Vue
 
 ## Purpose
-This library was designed to efficiently and automatically incorporate responses from API calls into your Vue application state. It consists of a single utility function, `stateMerge`, that performs a **deep merge** of one object into another.
+This library was designed to efficiently and automatically merge changes into a Vue-managed object into that object.
 
-I wrote this because while my application APIs are designed to return JSON that maps readily into the application's Vue/Vuex state, and I grew tired of writing one-off `mutations` for Vuex where 90% of the work was simply taking an API response key and writing it back into the same relative position in the application state.
+I really enjoy Vue and Vuex's -- update your state, and your UI will reactively update automatically. But what I don't enjoy is writing code to wire API JSON responses back into my Vue `data` or Vuex `state` objects (i.e., mutation functions):
 
-Now, many of my Vuex `actions` call their API endpoint and all commit a *single mutation* called `MERGE_STATE`. This `MERGE_STATE` mutation calls this function, `stateMerge`, to fold the keys and values returned from the API into the application state in one step, using the `Vue.set()` method to ensure Vue is properly aware of the changes and can react to them.
+``` JavaScript
+state: {
+	customer {
+		firstName: "",
+		lastName: ""
+		// ...
+	}
+},
+actions: {
+	getCustomer: id => axios
+		.get("/api/getCustomer/" + id)
+		.then(function(response) {
+			context.commit("COMMIT_CUSTOMER", response.data)
+		})
+},
+mutations: {
+	COMMIT_CUSTOMER(state, data) {
+		state.customer.firstName = data.firstName;
+		state.customer.lastName = data.lastName;
+		// ... sigh ...
+	},
+}
+```
 
-In addition to API calls, it can also be used for, say, updating `data` elements bound to form fields to match a Vuex state object, or vice versa.
+(The examples here are specific to Vuex, but apply equally if you're just using the `data` object to store your state.)
+
+If an object is replaced *entirely*, all you have to do is replace one object with another. But if the API needs to return *partial object changes* (perhaps even changes across several portions of the page state, such as updating a table and a page header and three menu options), you have to manually wire the bits and pieces. Worse, if each API call can return different portions of state, you'll be writing a LOT of boilerplate code.
+
+Vue-Object-Merge provides a single function, `stateMerge`, that performs a **deep merge** of one object into another. Basically, it greatly simplifies mapping keys from object `A` into Vue object `B`, *without* disturbing keys in `B` that are not included in `A`:
+
+```JavaScript
+mutations: {
+	// I can call this single mutation for any API response that sparely
+	// matches anything in the Vuex state.
+	MERGE_STATE: (state, response) => stateMerge(state, response),
+}
+```
+
+Now, many of my Vuex `actions` call their API endpoint and all commit a *single mutation* (as above). This `MERGE_STATE` mutation folds the keys and values returned from the API into the application state in one step, and it's all done in a way that Vue can react properly to the changes (*i.e.*, it uses `Vue.set()`).
+
+The API need not return a full representation of the state. For example, if an API call needs to update `state.ui.userForm.fields`, the API can just return the contents of the `fields` object (or any portion thereof) and your action can look like this:
+
+```JavaScript
+context.commit("MERGE_STATE", { ui: { userForm: { fields: response.data } } })
+```
+
+This will navigate `stateMerge` directly to the place in your state where the response data should be merged, leaving the rest of your state unaffected (and even any keys of `ui.userForm.fields` that aren't part of the JSON response).
+
+In addition to API calls, it can also be used for, say, updating `data` elements that are two-way-bound to form fields to set them to a Vuex state object, or vice versa to merge changes from the form back into the Vuex state.
 
 ## Function definition
 ```JavaScript
