@@ -5,7 +5,7 @@
 ## Purpose
 This library was designed to efficiently and automatically merge changes into a Vue-managed object into that object.
 
-I really enjoy Vue and Vuex's -- update your state, and your UI will reactively update automatically. But what I don't enjoy is writing code to wire API JSON responses back into my Vue `data` or Vuex `state` objects (i.e., mutation functions):
+I really enjoy Vue and Vuex's philosophy -- update your state, and your UI will reactively update automatically. But what I don't enjoy is writing code to wire API JSON responses back into my Vue `data` or Vuex `state` objects (i.e., mutation functions):
 
 ``` JavaScript
 state: {
