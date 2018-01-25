@@ -3,7 +3,7 @@
 > Utility function for merging an object into a reactive object in Vue
 
 ## Purpose
-This library was designed to efficiently and automatically merge changes into a Vue-managed object into that object.
+This library was designed to efficiently and automatically deep-merge objects with Vue-managed objects.
 
 I really enjoy Vue and Vuex's philosophy -- update your state, and your UI will reactively update automatically. But what I don't enjoy is writing code to wire API JSON responses back into my Vue `data` or Vuex `state` objects (i.e., mutation functions):
 
