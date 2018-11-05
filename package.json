@@ -3,7 +3,7 @@
 	"version": "0.1.5",
 	"description":
 		"Utility function for merging an object into a reactive object in Vue",
-	"main": "index.js",
+	"module": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
