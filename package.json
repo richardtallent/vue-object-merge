@@ -1,18 +1,25 @@
 {
 	"name": "vue-object-merge",
-	"version": "0.1.5",
-	"description":
-		"Utility function for merging an object into a reactive object in Vue",
+	"version": "0.1.6",
+	"description": "Utility function for merging an object into a reactive object in Vue",
+	"main": "main.js",
 	"module": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Richard Tallent <richard@tallent.us> (https://www.tallent.us)",
-	"keywords": ["vue", "vuejs", "vuex", "merge", "deep assign"],
+	"keywords": [
+		"vue",
+		"vuejs",
+		"vuex",
+		"merge",
+		"deep assign"
+	],
 	"repository": "https://github.com/richardtallent/vue-object-merge",
 	"license": "MIT",
 	"dependencies": {
-		"vue": "^2.5.13"
+		"vue": "2.5.17",
+		"esm": "3.0.84"
 	},
 	"prettier": {
 		"useTabs": true,
