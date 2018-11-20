@@ -18,8 +18,8 @@
 	"repository": "https://github.com/richardtallent/vue-object-merge",
 	"license": "MIT",
 	"dependencies": {
-		"vue": "2.5.17",
-		"esm": "3.0.84"
+		"esm": "^3.0.84",
+		"vue": "2.5.17"
 	},
 	"prettier": {
 		"useTabs": true,

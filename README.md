@@ -156,3 +156,4 @@ export const store = new Vuex.Store({
 | 2018.01.03 | 0.1.3   | IE11 doesn't like `for(const...)`        |
 | 2018.01.11 | 0.1.4   | npm build doesn't like ES6 at all        |
 | 2018.01.15 | 0.1.5   | Added ignoreNull parameter               |
+| 2018.11.19 | 0.1.6   | Add proper ESM/CJS, update Vue dep       |
