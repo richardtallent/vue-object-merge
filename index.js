@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-export const stateMerge = function(state, value, propName, ignoreNull) {
+export const stateMerge = (state, value, propName, ignoreNull) => {
 	if (
 		Object.prototype.toString.call(value) === "[object Object]" &&
 		(propName == null || state.hasOwnProperty(propName))
@@ -13,3 +13,5 @@ export const stateMerge = function(state, value, propName, ignoreNull) {
 	}
 	if (!ignoreNull || value !== null) Vue.set(state, propName, value);
 };
+
+export default stateMerge;
