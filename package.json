@@ -1,6 +1,6 @@
 {
 	"name": "vue-object-merge",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Utility function for merging an object into a reactive object in Vue",
 	"main": "main.js",
 	"module": "index.js",
@@ -19,7 +19,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"esm": "^3.0.84",
-		"vue": "2.5.17"
+		"vue": "^2.5.21"
 	},
 	"prettier": {
 		"useTabs": true,
