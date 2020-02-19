@@ -6,10 +6,12 @@ export const stateMerge = function(state, value, propName, ignoreNull) {
 		(propName == null || state.hasOwnProperty(propName))
 	) {
 		const o = propName == null ? state : state[propName];
-		for (var prop in value) {
-			stateMerge(o, value[prop], prop, ignoreNull);
+		if (o != null) {
+			for (var prop in value) {
+				stateMerge(o, value[prop], prop, ignoreNull);
+			}
+			return;
 		}
-		return;
 	}
 	if (!ignoreNull || value !== null) Vue.set(state, propName, value);
 };
