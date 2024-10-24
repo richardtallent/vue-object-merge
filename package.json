@@ -19,7 +19,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"esm": "^3.0.84",
-		"vue": "^2.5.21"
+		"vue": "^3.0.0"
 	},
 	"prettier": {
 		"useTabs": true,
